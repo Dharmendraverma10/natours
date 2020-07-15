@@ -5,7 +5,7 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A review can not be empty.'],
   },
-  ratings: {
+  rating: {
     type: Number,
     min: 1,
     max: 5,
@@ -24,6 +24,14 @@ const reviewSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, 'Review must belong to a user.'],
   },
+});
+
+reviewSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'name photo',
+  });
+  next();
 });
 
 const Review = mongoose.model('Review', reviewSchema);
