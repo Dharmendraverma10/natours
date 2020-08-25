@@ -68,6 +68,17 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMyReviews = (req, res) => {
+  res.status(200).render('pageNotFound', {
+    title: 'My Reviews',
+  });
+};
+exports.getMyBillings = (req, res) => {
+  res.status(200).render('pageNotFound', {
+    title: 'My Billings',
+  });
+};
+
 exports.updateUserData = catchAsync(async (req, res, next) => {
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
